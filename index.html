@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Catalog</title>
+    <style>
+        /* Add some basic styles */
+    </style>
+</head>
+<body>
+    <h1>Card Catalog</h1>
+    <div>
+        <label for="filter">Filter by: </label>
+        <select id="filter">
+            <option value="release_year">Release Year</option>
+            <option value="name">Name</option>
+            <option value="cost">Cost</option>
+            <option value="type">Type</option>
+            <option value="subtype">Subtype</option>
+            <option value="ability">Ability</option>
+            <option value="power">Power</option>
+            <option value="toughness">Toughness</option>
+        </select>
+        <input type="text" id="filterValue" placeholder="Enter filter value">
+        <button onclick="applyFilter()">Filter</button>
+    </div>
+    <div id="cards"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
