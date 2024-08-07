@@ -4,28 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Catalog</title>
-    <style>
-        /* Add some basic styles */
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Card Catalog</h1>
-    <div>
-        <label for="filter">Filter by: </label>
-        <select id="filter">
-            <option value="release_year">Release Year</option>
-            <option value="name">Name</option>
-            <option value="cost">Cost</option>
-            <option value="type">Type</option>
-            <option value="subtype">Subtype</option>
-            <option value="ability">Ability</option>
-            <option value="power">Power</option>
-            <option value="toughness">Toughness</option>
-        </select>
-        <input type="text" id="filterValue" placeholder="Enter filter value">
-        <button onclick="applyFilter()">Filter</button>
+    <div class="container">
+        <div>
+            <label for="filter">Filter by: </label>
+            <select id="filter">
+                <option value="release_year">Release Year</option>
+                <option value="name">Name</option>
+                <option value="cost">Cost</option>
+                <option value="type">Type</option>
+                <option value="subtype">Subtype</option>
+                <option value="ability">Ability</option>
+                <option value="power">Power</option>
+                <option value="toughness">Toughness</option>
+            </select>
+            <input type="text" id="filterValue" placeholder="Enter filter value">
+            <button onclick="applyFilter()">Filter</button>
+            <button onclick="downloadFilteredCards()">Download Filtered Cards</button>
+        </div>
+        <div id="cards"></div>
+        <h2>Add New Card</h2>
+        <form id="addCardForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="releaseYear">Release Year:</label>
+            <input type="number" id="releaseYear" name="releaseYear" required><br>
+
+            <label for="cost">Cost:</label>
+            <input type="text" id="cost" name="cost" required><br>
+
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" required><br>
+
+            <label for="subtype">Subtype:</label>
+            <input type="text" id="subtype" name="subtype"><br>
+
+            <label for="ability">Ability:</label>
+            <input type="text" id="ability" name="ability"><br>
+
+            <label for="power">Power:</label>
+            <input type="number" id="power" name="power"><br>
+
+            <label for="toughness">Toughness:</label>
+            <input type="number" id="toughness" name="toughness"><br>
+
+            <button type="submit">Add Card</button>
+        </form>
     </div>
-    <div id="cards"></div>
 
     <script src="script.js"></script>
 </body>

@@ -1,39 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetchCards();
-
-    document.getElementById('filter').addEventListener('change', fetchCards);
-});
-
-function fetchCards() {
-    fetch('http://localhost:3000/cards')
-        .then(response => response.json())
-        .then(data => displayCards(data));
-}
-
-function displayCards(cards) {
-    const cardContainer = document.getElementById('cards');
-    cardContainer.innerHTML = '';
-    cards.forEach(card => {
-        const cardElement = document.createElement('div');
-        cardElement.classList.add('card');
-        cardElement.innerHTML = `
-            <h2>${card.name}</h2>
-            <p>Release Year: ${card.release_year}</p>
-            <p>Cost: ${card.cost}</p>
-            <p>Type: ${card.type}</p>
-            <p>Subtype: ${card.subtype}</p>
-            <p>Ability: ${card.ability}</p>
-            <p>Power: ${card.power}</p>
-            <p>Toughness: ${card.toughness}</p>
-        `;
-        cardContainer.appendChild(cardElement);
+    // Fetch and display filtered cards only when the filter button is clicked
+    document.getElementById('filter').addEventListener('change', () => {
+        // Clear existing cards when changing filter criteria
+        document.getElementById('cards').innerHTML = '';
     });
-}
 
-function applyFilter() {
-    const filter = document.getElementById('filter').value;
-    const filterValue = document.getElementById('filterValue').value;
-    fetch(`http://localhost:3000/cards?${filter}=${filterValue}`)
+    // Handle form submission for adding a new card
+    document.getElementById('addCardForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Create a FormData object to collect form data
+        const formData = new FormData(this);
+
+        // Send form data to server for adding a new card
+        fetch('http://localhost:3300/cards', {
+            method: 'POST',
+            body: formData
+        })
         .then(response => response.json())
-        .then(data => displayCards(data));
-}
+        .then(data => {
+            // Display success message or handle response as needed
+            console.log('New card added:', data);
+            // Optionally, you can clear the form fields after successful submission
+            this.reset();
+        })
+        .catch(error => {
+            console.error('Error adding new card:', error);
+            // Display error message or handle error as needed
+        });
+    });
+});
