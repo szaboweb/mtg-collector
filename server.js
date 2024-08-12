@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
 const upload = multer({ dest: 'uploads/' });
+const fs = require('fs');
+require('dotenv').config();
 
 const app = express();
 app.use(bodyParser.json());
@@ -45,13 +47,24 @@ app.get('/cards', (req, res) => {
 
 // Add new card
 app.post('/cards', (req, res) => {
-    let newCard = req.body;
-    let sql = 'INSERT INTO Cards SET ?';
+    const newCard = req.body;
+
+    // Validate newCard object
+    if (!newCard || Object.keys(newCard).length === 0) {
+        return res.status(400).json({ error: 'Invalid card data' });
+    }
+
+    const sql = 'INSERT INTO Cards SET ?';
+
     db.query(sql, newCard, (err, result) => {
-        if (err) throw err;
+        if (err) {
+            console.error('Error adding card:', err);
+            return res.status(500).send('Internal Server Error');
+        }
         res.json({ id: result.insertId, ...newCard });
     });
 });
+
 
 // File upload and processing
 app.post('/upload', upload.single('file'), (req, res) => {
