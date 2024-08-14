@@ -9,12 +9,12 @@ const app = express();
 app.use(bodyParser.json());
 
 // Serve static files from the "public" directory
-const publicPath = path.join(__dirname);
+const publicPath = path.join(__dirname, 'public');
 app.use(express.static(publicPath));
 
 // Serve the index.html file when the root URL is accessed
 app.get('/', (req, res) => {
-    const indexPath = path.join(publicPath, 'index.html');
+    const indexPath = path.join(publicPath, 'public', 'index.html');
     res.sendFile(indexPath);
 });
 
