@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '11leve19lezeS3221',
+    password: '1**********1',
     database: 'mtgCatalog',
     port: 3306
 });
